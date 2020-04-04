@@ -1,7 +1,12 @@
 package com.example.fragmenu.ui.dashboard;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,23 +33,27 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-public class DashboardFragment extends Fragment {
+import static android.widget.Toast.LENGTH_SHORT;
+import static android.widget.Toast.makeText;
+import static androidx.core.content.ContextCompat.getSystemService;
+
+public class DashboardFragment extends Fragment implements LocationListener {
 
     MapView mMapView;
     private GoogleMap googleMap;
+    private double lat;
+    private double lon;
+    protected LocationManager locationManager;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
         View rootView = inflater.inflate(R.layout.fragment_dashboard, container, false);
+        locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
         mMapView = (MapView) rootView.findViewById(R.id.mapView);
         mMapView.onCreate(savedInstanceState);
 
         mMapView.onResume(); // needed to get the map to display immediately
-
-
-
-
 
 
         mMapView.getMapAsync(new OnMapReadyCallback() {
@@ -60,11 +69,18 @@ public class DashboardFragment extends Fragment {
                 googleMap.setMyLocationEnabled(true);
                 googleMap.getUiSettings().setMyLocationButtonEnabled(true);
 
+                Location vodafone=locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+                lat=vodafone.getLatitude();
+                lon=vodafone.getLongitude();
 
+                String latitude=String.valueOf(lat);
+                String longtidute=String.valueOf(lon);
+               // locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
+                makeText(getActivity(),"Lat: "+lat+" Lon: "+lon,LENGTH_SHORT).show();
 
 
                 // For dropping a marker at a point on the Map
-                LatLng sydney = new LatLng(-34, 151);
+                LatLng sydney = new LatLng(lat, lon);
                 googleMap.addMarker(new MarkerOptions().position(sydney).title("Marker Title").snippet("Marker Description"));
 
                 // For zooming automatically to the location of the marker
@@ -106,4 +122,29 @@ public class DashboardFragment extends Fragment {
         super.onLowMemory();
         mMapView.onLowMemory();
     }
-}
+
+    @Override
+    public void onLocationChanged(Location location) {
+
+    }
+
+    @Override
+    public void onStatusChanged(String s, int i, Bundle bundle) {
+
+    }
+
+    @Override
+    public void onProviderEnabled(String s) {
+
+    }
+
+    @Override
+    public void onProviderDisabled(String s) {
+
+    }
+    
+
+    }
+
+
+
