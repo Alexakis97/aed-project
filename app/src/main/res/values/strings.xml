@@ -1,8 +1,8 @@
 <resources>
-    <string name="app_name">fragmenu</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="app_name">Save a Life</string>
+    <string name="title_addAED">Προσθήκη Απινιδωτή</string>
+    <string name="title_seeAED">Αρχική</string>
+    <string name="title_event">Συμβάν</string>
 
     <string name="map_key">AIzaSyDEo8rAjqDYrfGglqlFCzCT5n_QYjnddCU</string>
     <string name="error_permission_map">Need Permission</string>

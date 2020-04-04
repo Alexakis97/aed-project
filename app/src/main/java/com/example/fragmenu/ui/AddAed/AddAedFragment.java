@@ -1,4 +1,4 @@
-package com.example.fragmenu.ui.home;
+package com.example.fragmenu.ui.AddAed;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,14 +12,14 @@ import androidx.fragment.app.Fragment;
 
 import com.example.fragmenu.R;
 
-public class HomeFragment extends Fragment {
+public class AddAedFragment extends Fragment {
 
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
-        View root = inflater.inflate(R.layout.fragment_home, container, false);
+        View root = inflater.inflate(R.layout.fragment_addaed, container, false);
         final TextView textView = root.findViewById(R.id.text_home);
 
         Button submitButton = (Button) root.findViewById(R.id.button);
